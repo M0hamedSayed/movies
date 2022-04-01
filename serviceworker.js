@@ -1,18 +1,20 @@
 const CASH_NAME = "default-cache";
-const urlToCache = ['/index.html'];
+const urlToCache = ['/movies'];
 
 const self = this;
 
 //install SW
 self.addEventListener('install', async (e) => {
+    console.log(self);
     console.log('From Install');
     let cache = await caches.open(CASH_NAME);
     await cache.addAll(urlToCache);
     await self.skipWaiting();
 })
-
+console.log(this);
 //listen for requests
-self.addEventListener('fetch', async (e) => {
+this.addEventListener('fetch', async function (e) {
+    console.log("test-offline");
     if (!navigator.onLine) {
         console.log("test-offline");
         return await e.respondWith(await caches.match(e.request) || await caches.match('/notfound'))
@@ -20,21 +22,21 @@ self.addEventListener('fetch', async (e) => {
         console.log("test online");
         return await e.respondWith(networkFirst(e.request));
     }
-
 })
 
 //Activate SW
 self.addEventListener('activate', async (e) => {
-    // const cacheWhiteList = [];
-    // cacheWhiteList.push(CASH_NAME);
-    // cacheWhiteList.push('dynamic-cache');
-    // let allCaches = await caches.keys();
-    // allCaches.map((cacheName) => {
-    //     if (!cacheWhiteList.includes(cacheName)) {
-    //         return caches.delete(cacheName)
-    //     }
-    // })
-
+    const cacheWhiteList = [];
+    cacheWhiteList.push(CASH_NAME);
+    cacheWhiteList.push('dynamic-cache');
+    let allCaches = await caches.keys();
+    allCaches.map((cacheName) => {
+        if (!cacheWhiteList.includes(cacheName)) {
+            return caches.delete(cacheName)
+        }
+    })
+    console.log('Claiming control');
+    return self.clients.claim();
 })
 
 
