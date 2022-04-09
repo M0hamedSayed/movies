@@ -1,0 +1,25 @@
+.mask-custom {
+    -webkit-mask-size: cover !important;
+}
+
+.progress::after {
+    background-color: rgba(251, 146, 60) !important;
+}
+
+.progress {
+    margin-left: 40%;
+}
+
+#scrollableDiv {
+
+    height: calc(100vh - 67px);
+    margin-top: 0;
+}
+
+@media screen and (max-width:1280px) {
+
+    #scrollableDiv {
+        height: calc(100vh - 82px);
+        margin-top: 82px;
+    }
+}

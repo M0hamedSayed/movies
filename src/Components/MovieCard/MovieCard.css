@@ -1,0 +1,12 @@
+.sh-drop {
+    -webkit-filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.75));
+    -moz-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.75));
+    -ms-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.75));
+    -o-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.75));
+
+}
+
+.heart {
+    left: 50%;
+    transform: translateX(-50%);
+}
